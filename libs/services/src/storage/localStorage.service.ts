@@ -5,12 +5,12 @@ import { Injectable } from "@angular/core";
 })
 export class LocalStorageService {
     setItem(key: string, value: any): void {
-        localStorage.setItem(key, JSON.stringify(value));
+        localStorage.setItem(key,value);
     }       
 
     getItem(key: string): any {
         const value = localStorage.getItem(key);
-        return value ? JSON.parse(value) : null;
+        return value ? value : null;
     }
 
     removeItem(key: string): void {
@@ -18,5 +18,10 @@ export class LocalStorageService {
     }
     clear(): void {
         localStorage.clear();
+    }
+
+     isLoggedIn() {
+       
+        return !!this.getItem('access_token');
     }
 }

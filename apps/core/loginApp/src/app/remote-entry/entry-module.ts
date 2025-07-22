@@ -8,6 +8,7 @@ import { remoteRoutes } from './entry.routes';
 import { StoreComponent } from './+Tutorial/+store/store.component';
 import { AuthloginComponent } from './authlogin/authlogin.component';
 import { LoginService } from '../../services/login.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [NxWelcome, StoreComponent],

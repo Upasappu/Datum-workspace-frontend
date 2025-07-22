@@ -1,12 +1,11 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MainMenuComponent } from "./mainMenu.component";
-import { QuickMenuComponent } from "./quickMenu.component";
-
+import { MainMenuComponent } from './mainMenu.component';
+import { QuickMenuComponent } from './quickMenu.component';
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule, MainMenuComponent,QuickMenuComponent],
+  imports: [CommonModule, MainMenuComponent, QuickMenuComponent],
   template: `
     <!--<h5 class="mb-4">ERP Menu</h5>
     <ul class="nav flex-column">
@@ -18,14 +17,14 @@ import { QuickMenuComponent } from "./quickMenu.component";
       <li class="nav-item"><a class="nav-link text-white" routerLink="/finance">Finance</a></li>*/
     </ul>-->
     <!-- Main Header Bar -->
-<nav class="navbar navbar-expand-lg navbar-dark hed"  >
-  <div class="container-fluid">
-    <!-- Logo/Title -->
-    <a class="navbar-brand fw-bold text-white" href="#">Datum Innovation</a>
+    <nav class="navbar navbar-expand-lg navbar-dark hed">
+      <div class="container-fluid">
+        <!-- Logo/Title -->
+        <a class="navbar-brand fw-bold text-white" href="#">Datum Innovation</a>
 
-    <!-- Menu Links -->
-    <div class="collapse navbar-collapse">
-       <!--  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- Menu Links -->
+        <div class="collapse navbar-collapse">
+          <!--  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item"><a class="nav-link active text-white" href="#">Orders</a></li>
         <li class="nav-item"><a class="nav-link text-white" href="#">To Invoice</a></li>
         <li class="nav-item"><a class="nav-link text-white" href="#">Products</a></li>
@@ -33,47 +32,63 @@ import { QuickMenuComponent } from "./quickMenu.component";
         <li class="nav-item"><a class="nav-link text-white" href="#">Configuration</a></li>
       </ul> -->
 
-      <!-- Right Side Icons and User -->
-      <div class="d-flex align-items-center gap-3 ms-auto d-flex align-items-center">
+          <!-- Right Side Icons and User -->
+          <div
+            class="d-flex align-items-center gap-3 ms-auto d-flex align-items-center"
+          >
+            <!-- Notification Bell -->
+            <div class="nav-item dropdown me-3">
+              <a
+                class="nav-link position-relative"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="bi bi-bell-fill text-white fs-5"></i>
+                <span
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                >
+                  3
+                  <span class="visually-hidden">unread notifications</span>
+                </span>
+              </a>
+              <!-- Dropdown Menu -->
+              <ul class="dropdown-menu dropdown-menu-end shadow">
+                <li><h6 class="dropdown-header">Notifications</h6></li>
+                <li>
+                  <a class="dropdown-item" href="#">📦 Order #1234 shipped</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">💬 New message from John</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#"
+                    >🔔 Server backup completed</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item text-primary" href="#">View all</a>
+                </li>
+              </ul>
+            </div>
 
-       <!-- Notification Bell -->
-    <div class="nav-item dropdown me-3">
-      <a
-        class="nav-link position-relative"
-        href="#"
-        role="button"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        <i class="bi bi-bell-fill text-white fs-5"></i>
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-          3
-          <span class="visually-hidden">unread notifications</span>
-        </span>
-      </a>
-      <!-- Dropdown Menu -->
-      <ul class="dropdown-menu dropdown-menu-end shadow">
-        <li><h6 class="dropdown-header">Notifications</h6></li>
-        <li><a class="dropdown-item" href="#">📦 Order #1234 shipped</a></li>
-        <li><a class="dropdown-item" href="#">💬 New message from John</a></li>
-        <li><a class="dropdown-item" href="#">🔔 Server backup completed</a></li>
-        <li><hr class="dropdown-divider" /></li>
-        <li><a class="dropdown-item text-primary" href="#">View all</a></li>
-      </ul>
-    </div>
-
-    
-      <!-- User Dropdown -->
-      <div class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">
-          Admin
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end">
-          <li><a class="dropdown-item" href="#">Profile</a></li>
-          <li><a class="dropdown-item" href="#">Logout</a></li>
-        </ul>
-      </div>
-        <!-- Notification Icons 
+            <!-- User Dropdown -->
+            <div class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle text-white"
+                href="#"
+                data-bs-toggle="dropdown"
+              >
+                Admin
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="#">Logout</a></li>
+              </ul>
+            </div>
+            <!-- Notification Icons 
         <span class="text-white">
           <i class="bi bi-bell"></i> <span class="badge bg-success">27</span>
         </span>
@@ -82,52 +97,125 @@ import { QuickMenuComponent } from "./quickMenu.component";
         </span>
 
         <!-- User Dropdown -->
-        <div class="dropdown">
-          <button class="btn btn-sm btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
-            Demo Company
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="#">My Profile</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Logout</a></li>
-          </ul>
-        </div>-->
+            <div class="dropdown">
+              <button
+                class="btn btn-sm btn-outline-light dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+              >
+                Demo Company
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">My Profile</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#">Logout</a></li>
+              </ul>
+            </div>
+            -->
 
-        <!-- Avatar 
+            <!-- Avatar 
         <img src="https://via.placeholder.com/30" class="rounded-circle" alt="User" />-->
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</nav>
+    </nav>
 
-<!--  Main menu -->
-<app-main-menu></app-main-menu>
-<!-- main menu end here -->
+    <!--  Main menu -->
+    <aside class="sidebar">
+    <nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <div class="sf-icon me-2"></div>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarContent"
+        >
+        Main menu  <span class="navbar-toggler-icon"></span>
+        </button>
 
-<!-- Quick Menu -->
-<app-quick-menu></app-quick-menu> 
-<!-- Quick Menu End -->
+      <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarshorcutContent"
+    >
+     Quick <span class="navbar-toggler-icon"></span>
+    </button>
 
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <app-main-menu></app-main-menu>
 
+          
+        </div>
+        </div>
+      </nav>
+    </aside>
+    <!-- main menu end here -->
+
+    <!-- Quick Menu -->
+    <app-quick-menu></app-quick-menu>
+    <!-- Quick Menu End -->
   `,
   styles: [
     `
-    .hed {
-     background: #333  no-repeat;
-     background-position: -0px -120px;
-     background-size: cover;
-    }
-    .sidebar a {
-      display: block;
-      color: #333;
-      padding: 10px;
-      text-decoration: none;
-    }
-    .sidebar a:hover {
-      background-color: #e9ecef;
-    }
-    `
-  ]
+      .hed {
+        background: #333 no-repeat;
+        background-position: -0px -120px;
+        background-size: cover;
+      }
+      .sidebar   { 
+        display: block;
+       
+        
+        text-decoration: none;
+        background-color: #3253a7;
+      }
+        .sidebar ul {
+       
+        background-color: transparent;
+      }
+     
+.navbar-nav , ul , .dropdown-menu, .nav-item > .dropdown-menu ul   { 
+        text-decoration: none;
+        background-color: #5172c5;
+      }
+       
+
+    /* Basic horizontal layout */
+
+
+/* Show dropdown on hover (desktop only) */
+@media (min-width: 992px) {
+  .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-menu .dropdown-menu {
+    top: 0;
+    left: 100%;
+  }
+}
+
+/* Always show nested submenu in mobile */
+@media (max-width: 991.98px) {
+  .dropdown-menu {
+    position: static;
+    display: block;
+    border: none;
+    padding-left: 1rem;
+    box-shadow: none;
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+  }
+}
+
+    `,
+  ],
 })
 export class AppHeaderComponent {}

@@ -304,7 +304,10 @@ export const ENDPOINTCONSTANT = {
     SAVESTOCKADJUSTMENT:'api/v1/stkRtnAdj/save?voucherId=',
     UPDATESTOCKADJUSTMENT:'api/v1/stkRtnAdj/update?voucherId=',
     FETCHPARTYBALANCE:'api/v1/invtrans/partyBal?partyid=',
-    FETCHCUSTOMERMOBILE:'api/v1/cussupp/partymobile'
+    FETCHCUSTOMERMOBILE:'api/v1/cussupp/partymobile',
+    FETCHNOTIFICATION:'api/v1/notification/allnotification',
+    FETCHNOTIFICATIONBYID:'api/v1/notification/byid',
+    
 }
 
 

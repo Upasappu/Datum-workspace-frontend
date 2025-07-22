@@ -1,12 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MainMenuComponent } from './mainMenu.component';
-import { QuickMenuComponent } from './quickMenu.component';
+import { MainMenuComponent } from "./mainMenu.component";
+import { QuickMenuComponent } from "./quickMenu.component";
+import { HttpClient } from "@angular/common/http";
+import { Router } from "@angular/router";
+import { NotificationdetailsComponent } from 'apps/core/coreApp/src/app/notificationdetails/notificationdetails.component';
+import { DataSharingService } from 'libs/services/src/utils/datasharing.service';
+import { CoreService } from 'apps/core/coreApp/src/services/core.service';
+import { APP_URL } from 'libs/utils/src/environments/environment';
+import { ENDPOINTCONSTANT } from 'libs/constants/src/lib/endpoint.constants';
+
 
 @Component({
   selector: 'app-header',
   imports: [CommonModule, MainMenuComponent, QuickMenuComponent],
   template: `
+  
     <!--<h5 class="mb-4">ERP Menu</h5>
     <ul class="nav flex-column">
       <li class="nav-item"><a class="nav-link text-white" routerLink="/">Home</a></li>
@@ -32,63 +41,50 @@ import { QuickMenuComponent } from './quickMenu.component';
         <li class="nav-item"><a class="nav-link text-white" href="#">Configuration</a></li>
       </ul> -->
 
-          <!-- Right Side Icons and User -->
-          <div
-            class="d-flex align-items-center gap-3 ms-auto d-flex align-items-center"
-          >
-            <!-- Notification Bell -->
-            <div class="nav-item dropdown me-3">
-              <a
-                class="nav-link position-relative"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <i class="bi bi-bell-fill text-white fs-5"></i>
-                <span
-                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                >
-                  3
-                  <span class="visually-hidden">unread notifications</span>
-                </span>
-              </a>
-              <!-- Dropdown Menu -->
-              <ul class="dropdown-menu dropdown-menu-end shadow">
-                <li><h6 class="dropdown-header">Notifications</h6></li>
-                <li>
-                  <a class="dropdown-item" href="#">📦 Order #1234 shipped</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">💬 New message from John</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#"
-                    >🔔 Server backup completed</a
-                  >
-                </li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item text-primary" href="#">View all</a>
-                </li>
-              </ul>
-            </div>
+      <!-- Right Side Icons and User -->
+      <div class="d-flex align-items-center gap-3 ms-auto d-flex align-items-center">
 
-            <!-- User Dropdown -->
-            <div class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle text-white"
-                href="#"
-                data-bs-toggle="dropdown"
-              >
-                Admin
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><a class="dropdown-item" href="#">Logout</a></li>
-              </ul>
-            </div>
-            <!-- Notification Icons 
+       <!-- Notification Bell -->
+    <div class="nav-item dropdown me-3">
+      <a
+        class="nav-link position-relative"
+        href="#"
+        role="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <i class="bi bi-bell-fill text-white fs-5"></i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          3
+          <span class="visually-hidden">unread notifications</span>
+        </span>
+      </a>
+      <!-- Dropdown Menu -->
+      <ul class="dropdown-menu dropdown-menu-end shadow">
+        <li><h6 class="dropdown-header">Notifications</h6></li>
+       
+       <li *ngFor="let notificationData of notificationData" (click)="viewNotification(notificationData)">
+  <a class="dropdown-item" style="cursor: pointer;">{{ notificationData.message }}</a>
+</li>
+
+
+        <li><hr class="dropdown-divider" /></li>
+        <li><a class="dropdown-item text-primary" href="#">View all</a></li>
+      </ul>
+    </div>
+
+    
+      <!-- User Dropdown -->
+      <div class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">
+          Admin
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li><a class="dropdown-item" href="#">Logout</a></li>
+        </ul>
+      </div>
+        <!-- Notification Icons 
         <span class="text-white">
           <i class="bi bi-bell"></i> <span class="badge bg-success">27</span>
         </span>
@@ -148,10 +144,12 @@ import { QuickMenuComponent } from './quickMenu.component';
 
         <div class="collapse navbar-collapse" id="navbarContent">
           <app-main-menu></app-main-menu>
+<!-- In AppHeaderComponent template -->
 
           
         </div>
         </div>
+        
       </nav>
     </aside>
     <!-- main menu end here -->
@@ -159,6 +157,7 @@ import { QuickMenuComponent } from './quickMenu.component';
     <!-- Quick Menu -->
     <app-quick-menu></app-quick-menu>
     <!-- Quick Menu End -->
+    
   `,
   styles: [
     `
@@ -218,4 +217,33 @@ import { QuickMenuComponent } from './quickMenu.component';
     `,
   ],
 })
-export class AppHeaderComponent {}
+export class AppHeaderComponent {
+
+  notificationData: any;
+
+  private dataSharingService = inject(DataSharingService);
+  private coreService = inject(CoreService);
+  constructor(private http: HttpClient, private router: Router) { }
+
+  ngOnInit(): void {
+    this.loadNotifications();
+  }
+
+
+  loadNotifications(): void {
+    const apiUrl = `${ENDPOINTCONSTANT.FETCHNOTIFICATION}`;
+    this.coreService.fetch<any[]>(apiUrl).subscribe(
+      (data) => {
+        this.notificationData = data;
+      },
+      (error) => {
+        console.error('Error fetching notifications:', error);
+      }
+    );
+  }
+
+  viewNotification(notificationData: any): void {
+    this.dataSharingService.sharedData = notificationData;
+    this.router.navigate(['/notificationdetails']);
+  }
+}

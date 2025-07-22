@@ -19,7 +19,6 @@ export class NotificationrecieverComponent implements OnInit {
    this.signalRService.startConnection();
     // Subscribe to the notifications observable
     this.signalRService.notifications$.subscribe((msgs) => {
-      console.log('Received notifications:', msgs);  // Log the notifications
       this.notifications = msgs;
     });
   }

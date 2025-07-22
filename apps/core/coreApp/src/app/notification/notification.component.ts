@@ -22,7 +22,7 @@ export class NotificationComponent implements OnInit {
       ItemID: '67890',
       DateTime: new Date(),
       UserName: 'user1',
-      RoleId :'1',
+      RoleId :1,
       IsRead: false
     };
     

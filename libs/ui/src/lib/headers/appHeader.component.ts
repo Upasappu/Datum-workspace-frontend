@@ -9,6 +9,7 @@ import { DataSharingService } from 'libs/services/src/utils/datasharing.service'
 import { CoreService } from 'apps/core/coreApp/src/services/core.service';
 import { APP_URL } from 'libs/utils/src/environments/environment';
 import { ENDPOINTCONSTANT } from 'libs/constants/src/lib/endpoint.constants';
+import { SignalRService } from 'libs/services/src/utils/SignalR.service.ts.service';
 
 
 @Component({
@@ -223,9 +224,14 @@ export class AppHeaderComponent {
 
   private dataSharingService = inject(DataSharingService);
   private coreService = inject(CoreService);
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private signalRService: SignalRService,private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
+     this.signalRService.startConnection();
+    // Subscribe to the notifications observable
+    this.signalRService.notifications$.subscribe((msgs) => {
+      this.notificationData = msgs;
+    });
     this.loadNotifications();
   }
 

@@ -1,6 +1,12 @@
 
 <div class="app-container">
     <main class="content">
+<shared-ui-loader *ngIf="loaderService.loading$ | async"></shared-ui-loader>
+    <div *ngIf="!isOnline" class="offline-banner">
+      ⚠️ You are offline. Please check your internet connection.
+    </div>
+ 
+
     <router-outlet></router-outlet>
     </main>
 </div>

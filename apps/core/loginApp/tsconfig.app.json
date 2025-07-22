@@ -5,7 +5,7 @@
     "types": [],
     "target": "ES2020"
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "../../../libs/models/src/currentUser/loginUserDto.model.ts", "../../../libs/models/src/currentUser/menuDto.model.ts", "../../../libs/models/src/currentUser/ShortcutMenuDto.model.ts", "../../../libs/models/src/currentUser/userSettingsDto.model.ts"],
   "exclude": [
     "jest.config.ts",
     "src/test-setup.ts",

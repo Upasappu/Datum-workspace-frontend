@@ -5,10 +5,11 @@ import { RouterModule } from '@angular/router';
 import { RemoteEntry } from './entry';
 import { NxWelcome } from './nx-welcome';
 import { remoteRoutes } from './entry.routes';
-import { AppHeaderComponent,MainMenuComponent} from '@datum/ui'; // Adjust the import path as necessary
+import { AppHeaderComponent,MainMenuComponent,QuickMenuComponent} from '@datum/ui'; // Adjust the import path as necessary
+import { CoreService } from '../../services/core.service';
 @NgModule({
   declarations: [RemoteEntry, NxWelcome],
-  imports: [CommonModule, RouterModule.forChild(remoteRoutes),AppHeaderComponent, MainMenuComponent],
-  providers: [],
+  imports: [CommonModule, RouterModule.forChild(remoteRoutes),AppHeaderComponent, MainMenuComponent, QuickMenuComponent],
+  providers: [CoreService],
 })
 export class RemoteEntryModule {}

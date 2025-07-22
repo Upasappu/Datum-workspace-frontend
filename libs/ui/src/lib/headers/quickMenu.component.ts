@@ -1,42 +1,44 @@
-import { Component } from "@angular/core";
+import { Component, inject, OnInit } from "@angular/core";
 import { CommonModule } from '@angular/common';
-
+import { LocalStorageService } from "@datum/services";
+import { ShortcutMenuDto } from "@datum/models";
 
 @Component({
   selector: 'app-quick-menu',
+  imports:[CommonModule],
   template: `
-  <aside class="sidebar">
-  <nav class="navbar navbar-expand-lg  ">
-    <a class="navbar-brand" href="#">
-      <div class="sf-icon me-2">SF</div>
-    </a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarContent"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <aside class="shortcutbar">
+  <nav class="navbar navbar-expand-lg  "  >
+  
+    
 
-    <div class="collapse navbar-collapse" id="navbarContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Sales</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Service</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Marketing</a>
-        </li>
-      </ul>
+    <div class="collapse navbar-collapse" id="navbarshorcutContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  <li class="nav-item" *ngFor="let smenu of _shortcutmenu">
+    <a class="nav-link" [href]="smenu.url">{{ smenu.menuText }}</a>
+  </li>
+</ul>
     </div>
   </nav>
 </aside>
 `,
-styles: [``]})
-export class QuickMenuComponent {
-  // This component is currently empty, but you can add functionality or properties as needed.
-  // For example, you might want to add methods to handle quick menu actions or properties to manage its state.
+styles: [`
+  .shortcutbar{
+  background: #ddd}
+  .shortcutbar ul { background-color: transparent !important; border-width:0px}
+.shortcutbar ul > li {
+border-right: 1px dashed #fafafa
+ }
+  .navbar{ padding:0}
+  `]})
+export class QuickMenuComponent implements OnInit {
+
+  localstorageService = inject(LocalStorageService)
+   _shortcutmenu: ShortcutMenuDto[] = [];
+
+  ngOnInit(): void {
+    const shortcutmenuObj = JSON.parse(this.localstorageService.getItem('shortcutMenu'));
+  this._shortcutmenu = shortcutmenuObj?.result || [];
+  }
+  
 }

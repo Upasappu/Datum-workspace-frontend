@@ -11,3 +11,5 @@ export interface CompanyDto {
     userCompanies: any[];
     companySchedules: any[];
   }
+
+  

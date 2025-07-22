@@ -1,11 +1,12 @@
 import { NxWelcome } from './nx-welcome';
 import { Route } from '@angular/router';
+import { AuthGuard } from '@datum/http';
 
 export const appRoutes: Route[] = [
   {
     path: '',
     loadChildren: () =>
-      import('coreApp/Module').then((m) => m!.RemoteEntryModule),
+      import('coreApp/Module').then((m) => m!.RemoteEntryModule),canActivate: [AuthGuard]
   },
   {
     path: 'auth',

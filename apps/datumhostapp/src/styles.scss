@@ -45,3 +45,20 @@ html, body {
   border-radius: 0.5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
+
+.navbar-nav , ul , .dropdown-menu ul, .nav-item > .dropdown-menu ul   { 
+        text-decoration: none;
+        background-color: #3253a7;
+        border: 1px dashed #3655a1;
+        padding: 0;;
+      }
+      .dropdown-menu {
+        background-color: transparent;
+        border: none  ;
+      }
+      .dropdown-menu ul:hover,  .dropdown-menu a:hover  {
+        background-color: #6b8ad8;
+      }
+      .dropdown-menu ul li:hover {
+        background-color: #8eabf3;
+      }
